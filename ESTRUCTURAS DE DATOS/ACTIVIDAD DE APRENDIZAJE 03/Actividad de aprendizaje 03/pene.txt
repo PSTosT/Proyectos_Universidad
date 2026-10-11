@@ -1,0 +1,145 @@
+Reptilia
+Julian Casablancas
+The Strokes
+1
+reptilia
+Get Lucky
+Thomas Bangalter
+Daft Punk
+2
+get_lucky
+Virtual Insanity
+Jay Kay
+Jamiroquai
+3
+virtual_insanity
+Purple Rain
+Prince
+Prince
+4
+purple_rain
+Crimen
+Gustavo Cerati
+Gustavo Cerati
+5
+crimen
+Persiana Americana
+Gustavo Cerati
+Soda Stereo
+6
+persiana_americana
+Karma Police
+Thom Yorke
+Radiohead
+7
+karma_police
+Do I Wanna Know?
+Alex Turner
+Arctic Monkeys
+8
+do_i_wanna_know
+Obstacle 1
+Paul Banks
+Interpol
+9
+obstacle_1
+The Less I Know The Better
+Kevin Parker
+Tame Impala
+10
+less_i_know
+Supermassive Black Hole
+Matt Bellamy
+Muse
+11
+supermassive
+Mr. Brightside
+Brandon Flowers
+The Killers
+12
+mr_brightside
+Take Me Out
+Alex Kapranos
+Franz Ferdinand
+13
+take_me_out
+Feel Good Inc.
+Damon Albarn
+Gorillaz
+14
+feel_good_inc
+Kids
+Andrew VanWyngarden
+MGMT
+15
+kids
+1901
+Thomas Mars
+Phoenix
+16
+1901_phoenix
+Eres
+Emmanuel del Real
+Cafe Tacvba
+17
+eres
+Viento
+Saul Hernandez
+Caifanes
+18
+viento
+Labios Rotos
+Leon Larregui
+Zoe
+19
+labios_rotos
+Lamento Boliviano
+Marciano Cantero
+Enanitos Verdes
+21
+lamento_boliviano
+Devuelveme A Mi Chica
+David Summers
+Hombres G
+22
+devuelveme_chica
+Heroes
+David Bowie
+David Bowie
+23
+heroes
+Boys Dont Cry
+Robert Smith
+The Cure
+24
+boys_dont_cry
+Enjoy The Silence
+Martin Gore
+Depeche Mode
+25
+enjoy_the_silence
+Blue Monday
+Bernard Sumner
+New Order
+26
+blue_monday
+There Is A Light That Never Goes Out
+Johnny Marr
+The Smiths
+27
+there_is_a_light
+London Calling
+Joe Strummer
+The Clash
+28
+london_calling
+Once In A Lifetime
+David Byrne
+Talking Heads
+29
+once_in_a_lifetime
+Californication
+Anthony Kiedis
+Red Hot Chili Peppers
+30
+californication

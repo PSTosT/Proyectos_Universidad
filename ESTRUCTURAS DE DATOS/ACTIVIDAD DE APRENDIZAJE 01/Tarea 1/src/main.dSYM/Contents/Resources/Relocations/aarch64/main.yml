@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/diego/programas/Tarea 1/Tarea 1/src/main'
+relocations:     []
+...

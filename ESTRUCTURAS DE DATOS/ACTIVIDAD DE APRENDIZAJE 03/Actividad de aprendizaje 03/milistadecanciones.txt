@@ -1,0 +1,150 @@
+Blinding Lights
+Abel Tesfaye
+The Weeknd
+1
+blinding_lights
+Shape of You
+Ed Sheeran
+Ed Sheeran
+2
+shape_of_you
+Bohemian Rhapsody
+Freddie Mercury
+Queen
+3
+bohemian_rhapsody
+Billie Jean
+Michael Jackson
+Michael Jackson
+4
+billie_jean
+Smells Like Teen Spirit
+Kurt Cobain
+Nirvana
+5
+smells_like_teen_spirit
+Rolling in the Deep
+Adele Adkins
+Adele
+6
+rolling_in_the_deep
+Lose Yourself
+Marshall Mathers
+Eminem
+7
+lose_yourself
+Hotel California
+Don Henley
+Eagles
+8
+hotel_california
+Stayin Alive
+Barry Gibb
+Bee Gees
+9
+stayin_alive
+Sweet Child O Mine
+Axl Rose
+Guns N Roses
+10
+sweet_child_o_mine
+As It Was
+Harry Styles
+Harry Styles
+11
+as_it_was
+Someone You Loved
+Lewis Capaldi
+Lewis Capaldi
+12
+someone_you_loved
+Hey Jude
+Paul McCartney
+The Beatles
+13
+hey_jude
+Like a Rolling Stone
+Bob Dylan
+Bob Dylan
+14
+like_a_rolling_stone
+Imagine
+John Lennon
+John Lennon
+15
+imagine
+Every Breath You Take
+Sting
+The Police
+16
+every_breath_you_take
+Wonderwall
+Noel Gallagher
+Oasis
+17
+wonderwall
+Viva La Vida
+Chris Martin
+Coldplay
+18
+viva_la_vida
+In the End
+Chester Bennington
+Linkin Park
+19
+in_the_end
+Believer
+Dan Reynolds
+Imagine Dragons
+20
+believer
+Uptown Funk
+Bruno Mars
+Mark Ronson
+21
+uptown_funk
+Sunflower
+Post Malone
+Post Malone
+22
+sunflower
+One Dance
+Aubrey Graham
+Drake
+23
+one_dance
+Starboy
+Abel Tesfaye
+The Weeknd
+24
+starboy
+Take On Me
+Magne Furuholmen
+A-ha
+25
+take_on_me
+Hallelujah
+Leonard Cohen
+Leonard Cohen
+26
+hallelujah
+Stay
+Charlton Howard
+The Kid LAROI
+27
+stay
+Heat Waves
+Dave Bayley
+Glass Animals
+28
+heat_waves
+Dont Stop Believin
+Steve Perry
+Journey
+29
+dont_stop_believin
+Levitating
+Dua Lipa
+Dua Lipa
+30
+levitating

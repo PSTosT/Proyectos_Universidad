@@ -1,15 +1,34 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/output/main",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "terminal": "external",
+      "preLaunchTask": "build"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/data/data/com.termux/files/home/Proyectos_Universidad/ESTRUCTURAS DE DATOS/PROYECTO PRELIMINAR/NEW PROYECT/src",
+      "program": "/data/data/com.termux/files/home/Proyectos_Universidad/ESTRUCTURAS DE DATOS/PROYECTO PRELIMINAR/NEW PROYECT/src/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
         {
-            "name": "Debug",
-            "type": "lldb",
-            "request": "launch",
-            "program": "${workspaceFolder}/output/main",
-            "args": [],
-            "cwd": "${workspaceFolder}",
-            "terminal": "external",
-            "preLaunchTask": "build"
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
         }
-    ]
+      ]
+    }
+  ]
 }

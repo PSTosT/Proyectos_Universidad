@@ -1,0 +1,9 @@
+# Archivos compilados de C++
+*.o
+*.out
+
+# Carpetas de ejecutables
+output/
+
+# Archivos del sistema de macOS
+.DS_Store

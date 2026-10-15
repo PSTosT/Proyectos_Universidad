@@ -12,7 +12,7 @@
 template <class T, int ARRAYSIZE>
 class List {
 private:
-    T data[ARRAYSIZE];
+    T** data = nullptr;
     int last = -1;
 
     bool isValidPos(const int& p) const;
@@ -48,10 +48,15 @@ class Exception : public std::exception {
 
     List();
     List(const List&);
+    ~List(); 
+
 
     bool isEmpty() const;
     bool isFull() const;
     
+    bool isSorted() const;
+    bool isSorted(const std::function<int(const T&, const T&)>& cmp) const;
+
     bool insData(const int& p, const T& e);
     bool delData(const int& p);
     
@@ -77,23 +82,6 @@ class Exception : public std::exception {
 
     int findDataB(const T& e) const;
     int findDataB(const T& e, const std::function<int(const T&, const T&)>& cmp) const;
-
-    // Metodos de ordenamiento iterartivos
-    void sortDataBubble();
-    void sortDataBubble(const std::function<int(const T&, const T&)>& cmp);
-    
-    void sortDataInsert();
-    void sortDataInsert(const std::function<int(const T&, const T&)>& cmp);
-
-    void sortDataSelect();
-    void sortDataSelect(const std::function<int(const T&, const T&)>& cmp);
-
-    void sortDataShell();
-    void sortDataShell(const std::function<int(const T&, const T&)>& cmp);
-
-    // Metodos de ordenamiento recursivos
-    void sortDataMerge();
-    void sortDataMerge(const std::function<int(const T&, const T&)>& cmp);
 
     void sortDataQuick();
     void sortDataQuick(const std::function<int(const T&, const T&)>& cmp);
@@ -129,12 +117,22 @@ void List<T, ARRAYSIZE>::swapData(T& a, T& b) {
 }
 
 template <class T, int ARRAYSIZE>
-List<T, ARRAYSIZE>::List() {}
+List<T, ARRAYSIZE>::List() : data(new(nothrow) T[ARRAYSIZE]) {
+    if (data == nullptr) {
+        throw Exception("Memoria no disponible, list");
+        }
+    for(int i(0); i < ARRAYSIZE; this->data[i++] = nullptr);
+    }
 
 template <class T, int ARRAYSIZE>
-List<T, ARRAYSIZE>::List(const List<T, ARRAYSIZE>& other) : last(other.last) {
+List<T, ARRAYSIZE>::List(const List<T, ARRAYSIZE>& other) : last(other.last) : List() {
     this->copyAll(other);
+    }
+
+~List(){
+    a
 }
+
 
 template <class T, int ARRAYSIZE>
 bool List<T, ARRAYSIZE>::isEmpty() const {
@@ -146,10 +144,44 @@ bool List<T, ARRAYSIZE>::isFull() const {
     return this->last == ARRAYSIZE - 1;
 }
 
+template<class T, int ARRAYSIZE>
+bool List<T,ARRAYSIZE>::isSorted() const{
+        int i(0);
+
+        while(i < this->last) {
+            if(*this->data[i] > *this->data[i + 1]){
+                return false;
+                }
+
+                i++;
+            }
+        return true;
+    }
+
+template<class T, int ARRAYSIZE>
+bool List<T,ARRAYSIZE>::isSorted(const std::function<int(const T&, const T&)>& cmp) const{
+        int i(0);
+
+        while(i < this->last) {
+            if(cmp(*this->data[i], *this->data[i + 1]) > 0){
+                return false;
+                }
+
+                i++;
+            }
+        return true;
+    }
+
 template <class T, int ARRAYSIZE>
 bool List<T, ARRAYSIZE>::insData(const int& p, const T& e) {
     if (isFull()) return false;
     if (p < 0 || p > last + 1) return false; 
+
+    T* newElem(new(nothrow) T);
+    
+    if(newElem == nullptr){
+        thorw Exception("Memoria no disponible, insData")
+        }
 
     for (int i = last; i >= p; i--) {
         data[i + 1] = data[i];
@@ -317,279 +349,6 @@ int List<T, ARRAYSIZE>::findDataB(const T& e, const std::function<int(const T&, 
     }
     return -1;
 }
-
-// BUBBLESORT
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataBubble() {
-    int i(this->last), j;
-    bool flag;
-
-    do {
-        flag = false;
-        j = 0;
-
-        while (j < i) {
-            if (this->data[j] > this->data[j + 1]) {
-                this->swapData(this->data[j], this->data[j + 1]);
-                flag = true;
-            }
-            j++;
-        }
-        i--;
-    } while (flag);
-}
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataBubble(const std::function<int(const T&, const T&)>& cmp) {
-    int i(this->last), j;
-    bool flag;
-
-    do {
-        flag = false;
-        j = 0;
-
-        while (j < i) {
-            if (cmp(this->data[j], this->data[j + 1]) > 0) {
-                this->swapData(this->data[j], this->data[j + 1]);
-                flag = true;
-            }
-            j++;
-        }
-        i--;
-    } while (flag);
-}
-
-
-// INSERTSORT
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataInsert() {
-    int i(1), j;
-    T aux;
-
-    while (i <= this->last) {
-        aux = this->data[i];
-        j = i;
-
-        while (j > 0 and aux < this->data[j - 1]) {
-            this->data[j] = this->data[j - 1]; 
-            j--;
-        }
-
-        if (i != j) {
-            this->data[j] = aux;
-        }
-        i++;
-    }
-}
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataInsert(const std::function<int(const T&, const T&)>& cmp) {
-    int i(1), j;
-    T aux;
-
-    while (i <= this->last) {
-        aux = this->data[i];
-        j = i;
-
-        while (j > 0 and cmp(aux, this->data[j - 1]) < 0) {
-            this->data[j] = this->data[j - 1]; 
-            j--;
-        }
-
-        if (i != j) {
-            this->data[j] = aux;
-        }
-        i++;
-    }
-}
-
-
-// SELECTSORT
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataSelect() {
-    int i(0), j, m;
-
-    while (i < this->last) {
-        m = i;
-        j = i + 1;
-
-        while (j <= this->last) {
-            if (this->data[j] < this->data[m]) {
-                m = j;
-            }
-            j++;
-        }
-
-        if (i != m) {
-            this->swapData(this->data[i], this->data[m]);
-        }
-        i++;
-    }
-}
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataSelect(const std::function<int(const T&, const T&)>& cmp) {
-    int i(0), j, m;
-
-    while (i < this->last) {
-        m = i;
-        j = i + 1;
-
-        while (j <= this->last) {
-            if (cmp(this->data[j], this->data[m]) < 0) {
-                m = j;
-            }
-            j++;
-        }
-
-        if (i != m) {
-            this->swapData(this->data[i], this->data[m]);
-        }
-        i++;
-    }
-}
-
-
-// SHELLSORT
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataShell() {
-    int gap((this->last + 1) / 2), i, j;
-    T aux;
-
-    while (gap > 0) {
-        i = gap;
-        while (i <= this->last) {
-            aux = this->data[i];
-            j = i;
-
-            while (j >= gap and aux < this->data[j - gap]) {
-                this->data[j] = this->data[j - gap];
-                j -= gap;
-            }
-            
-            this->data[j] = aux;
-            i++;
-        }
-        gap /= 2;
-    }
-}
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataShell(const std::function<int(const T&, const T&)>& cmp) {
-    int gap((this->last + 1) / 2), i, j;
-    T aux;
-
-    while (gap > 0) {
-        i = gap;
-        while (i <= this->last) {
-            aux = this->data[i];
-            j = i;
-
-            while (j >= gap and cmp(aux, this->data[j - gap]) < 0) {
-                this->data[j] = this->data[j - gap];
-                j -= gap;
-            }
-            
-            this->data[j] = aux;
-            i++;
-        }
-        gap /= 2;
-    }
-}
-
-
-// MERGESORT
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataMerge(){
-    this->sortDataMerge(0, this->last);
-} 
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataMerge(const int& leftEdge, const int& rightEdge){
-    if(leftEdge >= rightEdge){ 
-        return;
-    }
-    
-    int m((leftEdge + rightEdge) / 2);
-
-    this->sortDataMerge(leftEdge, m);
-    this->sortDataMerge(m + 1, rightEdge);
-
-    static T temp[ARRAYSIZE];
-
-    for(int z(leftEdge); z <= rightEdge; z++) {
-        temp[z] = this->data[z];
-    }
-
-    int i(leftEdge), j(m + 1), x(leftEdge);
-
-    while(i <= m and j <= rightEdge){
-        while(i <= m and temp[i] <= temp[j]){
-            this->data[x++] = temp[i++];
-        }
-        if(i <= m){
-            while(j <= rightEdge and temp[j] <= temp[i]){
-                this->data[x++] = temp[j++];
-            }
-        } 
-    }
-    
-    while(i <= m){
-        this->data[x++] = temp[i++];
-    }
-    while(j <= rightEdge){
-        this->data[x++] = temp[j++];
-    }
-}
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataMerge(const std::function<int(const T&, const T&)>& cmp){
-    this->sortDataMerge(0, this->last, cmp);
-}
-
-template <class T, int ARRAYSIZE>
-void List<T, ARRAYSIZE>::sortDataMerge(const int& leftEdge, const int& rightEdge, const std::function<int(const T&, const T&)>& cmp){
-    if(leftEdge >= rightEdge){ 
-        return;
-    }
-    
-    int m((leftEdge + rightEdge) / 2);
-
-    this->sortDataMerge(leftEdge, m, cmp);
-    this->sortDataMerge(m + 1, rightEdge, cmp);
-
-    static T temp[ARRAYSIZE];
-
-    for(int z(leftEdge); z <= rightEdge; z++) {
-        temp[z] = this->data[z];
-    }
-
-    int i(leftEdge), j(m + 1), x(leftEdge);
-
-    while(i <= m and j <= rightEdge){
-        while(i <= m and cmp(temp[i], temp[j]) <= 0){
-            this->data[x++] = temp[i++];
-        }
-        if(i <= m){
-            while(j <= rightEdge and cmp(temp[j], temp[i]) <= 0){
-                this->data[x++] = temp[j++];
-            }
-        } 
-    }
-    
-    while(i <= m){
-        this->data[x++] = temp[i++];
-    }
-    while(j <= rightEdge){
-        this->data[x++] = temp[j++];
-    }
-}
-
 
 // QUICKSORT
 

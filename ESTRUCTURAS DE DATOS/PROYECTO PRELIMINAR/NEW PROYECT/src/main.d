@@ -1,3 +1,3 @@
-src/main.o: src/main.cpp include/ingredientui.hpp include/ingredient.hpp \
-  include/list.hpp include/recipe.hpp include/name.hpp \
+src/main.o: src/main.cpp include/list.hpp include/recipe.hpp \
+  include/ingredient.hpp include/ingredientui.hpp include/name.hpp \
   include/recipeui.hpp

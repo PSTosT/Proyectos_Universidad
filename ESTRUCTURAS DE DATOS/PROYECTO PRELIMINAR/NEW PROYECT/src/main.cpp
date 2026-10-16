@@ -1,7 +1,5 @@
-#include <iostream>
-#include "ingredientui.hpp"
+
 #include "list.hpp"
-#include "ingredient.hpp"
 #include "recipe.hpp"
 #include "recipeui.hpp"
 

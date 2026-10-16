@@ -166,13 +166,3 @@ void Recipe::deserialize(const string& str, const char& delim){
    getline(mySStream, myStr);
    this->ingredientList.deserialize(myStr, '#'); 
 }
-
-
-//TODO: Quedaran pendientes hasta la proxima entrega...
-std::istream& operator>>(std::istream&, Recipe&){
-    
-}
-
-std::ostream& operator<<(std::ostream&, const Recipe&){
-    
-}

@@ -2,13 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug",
-      "type": "lldb",
+      "name": "Debug C++ (Termux)",
+      "type": "gdb",
       "request": "launch",
-      "program": "${workspaceFolder}/output/main",
-      "args": [],
+      "target": "${workspaceFolder}/output/main",
       "cwd": "${workspaceFolder}",
-      "terminal": "external",
       "preLaunchTask": "build"
     },
     {
@@ -18,8 +16,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/data/data/com.termux/files/home/Proyectos_Universidad/ESTRUCTURAS DE DATOS/PROYECTO PRELIMINAR/NEW PROYECT/src",
-      "program": "/data/data/com.termux/files/home/Proyectos_Universidad/ESTRUCTURAS DE DATOS/PROYECTO PRELIMINAR/NEW PROYECT/src/build/Debug/outDebug",
+      "cwd": ".",
+      "program": "build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

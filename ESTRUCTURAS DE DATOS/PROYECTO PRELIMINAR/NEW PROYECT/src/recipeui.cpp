@@ -5,6 +5,7 @@ using namespace std;
 RecipeUI::RecipeUI(List<Recipe, 1024>& list) : recipeListRef(list) { }
 
 void RecipeUI::manageRecipes(){
+    clearScreen();
     cout << "===========================================" << endl;
     cout << "     Bienvenido a tu Recetario Digital    " << endl;
     cout << "===========================================" << endl;
@@ -105,7 +106,7 @@ void RecipeUI::enterToContinue(){
 }
 
 void RecipeUI::clearScreen(){
-    cout << "\x1B[2J\x1B[H";
+    cout << "\033[2J\033[H"; 
 }
 
 void RecipeUI::addRecipe(){
@@ -438,7 +439,7 @@ void RecipeUI::modifyRecipe(){
             case 1:{
                 cout << "Escribe el nuevo procedimiento" << endl << ">> ";
                 getline(cin,myStr);
-                recipeListRef.retrieve(pos).setProcedure(myStr);
+                this->recipeListRef.retrieve(pos).setProcedure(myStr);
                 cout << "Proceso actualizado..." << endl;
                 break;
                 }
@@ -446,14 +447,14 @@ void RecipeUI::modifyRecipe(){
                 cout << "Escribe el nuevo tiempo de preparacion (minutos)" << endl;
                 cin >> tempTime;
                 cin.ignore();
-                recipeListRef.retrieve(pos).setPrepTime(tempTime);
+                this->recipeListRef.retrieve(pos).setPrepTime(tempTime);
                 cout << "Tiempo de preparacion actualizado..." << endl;
                 break;
                 }
             case 3: {
                 cout << "Modificar ingredientes..." << endl;
                 enterToContinue();
-                IngredientUI myIngredientUI(recipeListRef.retrieve(pos).getIngredientList());
+                IngredientUI myIngredientUI(this->recipeListRef.retrieve(pos).getIngredientList());
                 myIngredientUI.manageIngredient();
                 break;
                 }
@@ -466,10 +467,43 @@ void RecipeUI::modifyRecipe(){
     enterToContinue();
 }
 
-
-// Quedaran pendientes hasta la proxima entrega 
 void RecipeUI::sortRecipe(){
-    
+    clearScreen();
+
+    int opc;
+
+    cout << "Ordenar las recetas" << endl;
+
+    cout << "Selecciona una opcion: " << endl;
+    cout << "1. Ordenar por nombre de la receta" << endl;
+    cout << "2. Ordenar por tiempo de preparacion" << endl;
+    do{
+        cin >> opc;
+        cin.ignore();
+
+        switch(opc){
+
+        case 1: {
+            cout << "Ordenando por nombre de la receta..." << endl;
+            this->recipeListRef.sortDataQuick(Recipe::compareByName);
+            cout << "La lista fue ordenada por nombre!" << endl;
+        }
+        break;
+        
+        case 2: {
+            cout << "Ordenando por tiempo de preparacion..." << endl;
+            this->recipeListRef.sortDataQuick(Recipe::compareByPrepTime);
+            cout << "La lista fue ordenada por tiempo de preparacion!" << endl;
+        }
+        break;
+        
+        default: {
+            cout << "Selecciona una opcion correcta..." << endl;
+        }
+        break;
+        }
+    }while(opc < 1 or opc > 2);
+    enterToContinue();
 }
 
 void RecipeUI::writeToDisk(){

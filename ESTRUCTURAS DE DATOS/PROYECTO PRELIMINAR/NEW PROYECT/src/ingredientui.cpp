@@ -65,7 +65,7 @@ void IngredientUI::enterToContinue(){
 }
 
 void IngredientUI::clearScreen(){
-    cout << "\x1B[2J\x1B[H";
+    cout << "\033[2J\033[H"; 
 }
 
 void IngredientUI::addIngredient(){

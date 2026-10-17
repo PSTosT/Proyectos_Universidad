@@ -1,0 +1,9 @@
+GAL22V10
+PRACTICA
+
+A    B    C    NC   NC   NC   NC   NC   NC   NC   NC   GND
+NC   NC   NC   NC   NC   NC   NC   NC   NC   NC   Y    VCC
+
+Y = A * B + /C
+
+DESCRIPTION

@@ -94,7 +94,7 @@ void List<T, ARRAYSIZE>::copyAll(const List<T, ARRAYSIZE>& other) {
         this->data[i] = new(std::nothrow) T(*other.data[i]);
 
         if(this->data[i] == nullptr) {
-            throw Exception("Memoria no disponible, copyAll")
+            throw Exception("Memoria no disponible, copyAll");
         }
 
         i++;

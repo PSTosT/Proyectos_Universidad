@@ -3,222 +3,249 @@
 #include <exception>
 #include <string>
 
-//Definicion
+//*Definicion
 
 template<class T>
-class List{
-class Node;
+class List {
+class Node; //* Forward declaration! (Declaracion adelantada)
 
+// Definicion del tipo Posicion y clase Excepcion.
 public:
     typedef Node* Position;
 
+        //* Clase Excepcion de la lista
+        class Exception : public std::exception {
+        private:
+            std::string msg;
+
+        public:
+            Exception() noexcept : msg("Error indefinido") { }
+            Exception(const Exception& ex) noexcept : msg(ex.msg) { }
+            Exception(const std::string& m) : msg(m) { }
+            Exception& operator=(const Exception& ex) noexcept {
+                msg = ex.msg;
+                return *this;
+            }
+            virtual ~Exception() { }
+            virtual const char* what() const noexcept {
+                return msg.c_str();
+            }
+        };
+
+   
+
+private:
     
+    //Clase NODO
+    class Node{
+    private:
+        T data;
+        Position next = nullptr;
+    public:
+
+    Node(){ }
+
+    Node(const T&);
+
+    T& getData();
+
+    void setData(const T&);
+
+    List<T>::Position getNext();
+    
+    void setNext(List<T>::Position);
+    };
+
+    //Atributos y metodos privados del modelo de la lista
+
     Position anchor = nullptr;
 
-        bool isValidPos(const Position&) const;
+    bool isValidPos(const Position&) const;
 
-        void copyAll(const List<T>&);
+    void copyAll(const List<T>&);
 
 public:
-        List();
 
-        List(const List<T>&);
-        
-        ~List();
+    List();
 
-        List<T>& operator = (const List<T>&);
+    List(const List<T>&);
+    
+    ~List();
 
-        bool isEmpty() const;
-        
-        bool insData(const List<T>::Position&, const T&);
+    List<T>& operator = (const List<T>&);
 
-        bool delData(const List<T>::Position&);
-        
-        List<T>::Position getFirstPos() const;
-        List<T>::Position getLastPos() const;
-        List<T>::Position getPrevPos() const;
-        List<T>::Position getNextPos() const;
-        
-        List<T>::Position findData(const T&) const;
-        T& retrieve(const List<T>::Position&);
-        std::string toString() const;
-       
-        void delAll();
+    bool isEmpty() const;
+    
+    bool insData(const List<T>::Position&, const T&);
 
-        template <class X>
-        friend std::istream& operator>>(std::istream&, List<X>&);
+    bool delData(const List<T>::Position&);
+    
+    List<T>::Position getFirstPos() const;
 
-        template <class X
-        friend std::ostream& operator<<(std::ostream&, const List<X>&);
+    List<T>::Position getLastPos() const;
 
-        bool insertOrdered(const T&);
+    List<T>::Position getPrevPos(const List<T>::Position&) const;
 
-        int findDataL(const T& e) const;
-        int findDataL(const T& e, const std::function<int(const T&, const T&)>& cmp) const;
+    List<T>::Position getNextPos(const List<T>::Position&) const;
+    
+    List<T>::Position findData(const T&) const;
+    List<T>::Position findData(const T&, const std::function<int(const T&, const T&)>) const;
 
-        int findDataB(const T& e) const;
-        int findDataB(const T& e, const std::function<int(const T&, const T&)>& cmp) const;
+    T& retrieve(const List<T>::Position&);
 
-        // Metodos de ordenamiento iterartivos
-        
+    std::string toString() const;
+    
+    void delAll();
 
-        //Serializacion y deserializacion
+    template <class X>
+    friend std::istream& operator>>(std::istream&, List<X>&);
 
-        std::string serialize(const char& delim = '*') const;
-        void deserialize(const std::string&, const char& delim = '*');
+    template <class X
+    friend std::ostream& operator<<(std::ostream&, const List<X>&);
 
-     };
-     template<class T>
-     List<T>::List()
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::List(const List<T>&)
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::~List()
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::~List()
-     {
-         
-     }
-     
-     template<class T>
-     List<T>& List<T>::operator = (const List<T>&)
-     {
-         
-     }
-     
-     template<class T>
-     bool List<T>::isEmpty() const
-     {
-         
-     }
-     
-     template<class T>
-     bool List<T>::insData(const List<T>::Position&, const T&)
-     {
-         
-     }
-     
-     template<class T>
-     bool List<T>::insData(const List<T>::Position&, const T&)
-     {
-         
-     }
-     
-     template<class T>
-     bool List<T>::delData(const List<T>::Position&)
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::Position List<T>::getFirstPos() const
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::Position List<T>::getFirstPos() const
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::Position List<T>::getLastPos() const
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::Position List<T>::getPrevPos() const
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::Position List<T>::getNextPos() const
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::Position List<T>::findData(const T&) const
-     {
-         
-     }
-     
-     template<class T>
-     List<T>::Position List<T>::findData(const T&) const
-     {
-         
-     }
-     
-     template<class T>
-     T& List<T>::retrieve(const List<T>::Position&)
-     {
-         
-     }
-     
-     template<class T>
-     std::string List<T>::toString() const
-     {
-         
-     }
-     
-     template<class T>
-     void List<T>::delAll()
-     {
-         
-     }
-     
-     X
-             std::ostream& operator<<(std::ostream&, const List<X>&)
-     {
-         
-     }
-     
-     template<class X>
-     std::istream& operator>>(std::istream&, List<X>&)
-     {
-         
-     }
-     
+    bool insertOrdered(const T&);
 
-     template<class T>
-            List<T>::Node(){ }
+    int findDataL(const T& e) const;
+    int findDataL(const T& e, const std::function<int(const T&, const T&)>& cmp) const;
 
-            template<class T>
-            List<T>::Node::Node(const T& e) :data(e) { }
+    std::string serialize(const char& delim = '*') const;
+    void deserialize(const std::string&, const char& delim = '*');
+};
 
-            template<class T>
-            T& List<T>::Node::getData(){
-                return this->data;
-            }
+//*Implementacion del nodo
 
-            template<class T>
-            void List<T>::Node::setData(const T& e){
-                this->data = e;
-            }
+template<class T>
+List<T>::Node::Node() { }
 
-            template<class T>
-            List<T>::Node* List<T>::Node::getNext(){
-                return this->next;
-            }
+template<class T>
+List<T>::Node::Node(const T& e) :data(e) { }
 
-            template<class T>
-            void List<T>::Node::setNext(Node* p){
-                this->next = p;
-            }
+template<class T>
+T& List<T>::Node::getData(){
+    return this->data;
+}
+
+template<class T>
+void List<T>::Node::setData(const T& e){
+    this->data = e;
+}
+
+template<class T>
+List<T>::Position List<T>::Node::getNext(){
+    return this->next;
+}
+
+template<class T>
+void List<T>::Node::setNext(List<T>::Position p){
+    this->next = p;
+}
+
+//*Implementacion de la lista
+
+template<class T>
+List<T>::List(){
+    
+}
+
+template<class T>
+List<T>::List(const List<T>&){
+    
+}
+
+template<class T>
+List<T>::~List(){
+    
+}
+
+template<class T>
+List<T>::~List(){
+    
+}
+
+template<class T>
+List<T>& List<T>::operator = (const List<T>&){
+    
+}
+
+template<class T>
+bool List<T>::isEmpty() const{
+    
+}
+
+template<class T>
+bool List<T>::insData(const List<T>::Position&, const T&){
+    
+}
+
+template<class T>
+bool List<T>::insData(const List<T>::Position&, const T&){
+    
+}
+
+template<class T>
+bool List<T>::delData(const List<T>::Position&){
+    
+}
+
+template<class T>
+List<T>::Position List<T>::getFirstPos() const{
+    
+}
+
+template<class T>
+List<T>::Position List<T>::getFirstPos() const{
+    
+}
+
+template<class T>
+List<T>::Position List<T>::getLastPos() const{
+    
+}
+
+template<class T>
+List<T>::Position List<T>::getPrevPos() const{
+    
+}
+
+template<class T>
+List<T>::Position List<T>::getNextPos() const{
+    
+}
+
+template<class T>
+List<T>::Position List<T>::findData(const T&) const{
+    
+}
+
+template<class T>
+List<T>::Position List<T>::findData(const T&) const{
+    
+}
+
+template<class T>
+T& List<T>::retrieve(const List<T>::Position&){
+    
+}
+
+template<class T>
+std::string List<T>::toString() const{
+    
+}
+
+template<class T>
+void List<T>::delAll(){
+    
+}
+
+std::ostream& operator<<(std::ostream&, const List<X>&){
+    
+}
+
+template<class X>
+std::istream& operator>>(std::istream&, List<X>&){
+    
+}
+
+
 // List 
 #endif // __LIST_H__

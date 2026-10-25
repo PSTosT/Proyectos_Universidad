@@ -1,0 +1,250 @@
+Reptilia
+Julian Casablancas
+The Strokes
+12
+reptilia
+Tu Falta de Querer
+Mon Laferte
+Mon Laferte
+3
+tu_falta
+City of Stars
+Justin Hurwitz
+Ryan Gosling
+8
+city_of_stars
+One More Time
+Thomas Bangalter
+Daft Punk
+1
+one_more_time
+De Musica Ligera
+Gustavo Cerati
+Soda Stereo
+15
+musica_ligera
+Last Nite
+Julian Casablancas
+The Strokes
+22
+last_nite
+Amarrame
+Mon Laferte
+Mon Laferte
+5
+amarrame
+Harder Better Faster Stronger
+Guy-Manuel de Homem-Christo
+Daft Punk
+7
+harder_better
+Another Day of Sun
+Justin Hurwitz
+La La Land Cast
+18
+another_day
+Lamento Boliviano
+Natalio Faingold
+Enanitos Verdes
+30
+lamento_boliviano
+Someday
+Julian Casablancas
+The Strokes
+40
+someday
+Mi Buen Amor
+Mon Laferte
+Mon Laferte
+11
+mi_buen_amor
+Get Lucky
+Pharrell Williams
+Daft Punk
+2
+get_lucky
+Audition
+Justin Hurwitz
+Emma Stone
+25
+audition
+Afuera
+Saul Hernandez
+Caifanes
+33
+afuera
+You Only Live Once
+Julian Casablancas
+The Strokes
+45
+you_only_live
+El Beso
+Mon Laferte
+Mon Laferte
+14
+el_beso
+Instant Crush
+Julian Casablancas
+Daft Punk
+9
+instant_crush
+Someone In The Crowd
+Justin Hurwitz
+Emma Stone
+28
+someone_crowd
+Rayando el Sol
+Fher Olvera
+Mana
+55
+rayando_sol
+Under Cover of Darkness
+Julian Casablancas
+The Strokes
+50
+under_cover
+Amor Completo
+Mon Laferte
+Mon Laferte
+19
+amor_completo
+Around the World
+Thomas Bangalter
+Daft Punk
+17
+around_world
+A Lovely Night
+Justin Hurwitz
+Ryan Gosling
+35
+lovely_night
+La Celula Que Explota
+Saul Hernandez
+Caifanes
+60
+celula_explota
+Machu Picchu
+Julian Casablancas
+The Strokes
+65
+machu_picchu
+Primaveras
+Mon Laferte
+Mon Laferte
+24
+primaveras
+Lose Yourself to Dance
+Pharrell Williams
+Daft Punk
+21
+lose_yourself
+Triste Cancion
+Alex Lora
+El Tri
+70
+triste_cancion
+Is This It
+Julian Casablancas
+The Strokes
+75
+is_this_it
+Antes de Ti
+Mon Laferte
+Mon Laferte
+29
+antes_de_ti
+Something About Us
+Guy-Manuel de Homem-Christo
+Daft Punk
+26
+something_about_us
+Kumbala
+Rolando Ortega
+Maldita Vecindad
+80
+kumbala
+12:51
+Julian Casablancas
+The Strokes
+85
+12_51
+Tormento
+Mon Laferte
+Mon Laferte
+34
+tormento
+Technologic
+Thomas Bangalter
+Daft Punk
+31
+technologic
+Persiana Americana
+Gustavo Cerati
+Soda Stereo
+42
+persiana_americana
+Heart in a Cage
+Julian Casablancas
+The Strokes
+90
+heart_in_cage
+Vuelve Por Favor
+Mon Laferte
+Mon Laferte
+39
+vuelve_por_favor
+Da Funk
+Thomas Bangalter
+Daft Punk
+38
+da_funk
+Oye Mi Amor
+Fher Olvera
+Mana
+48
+oye_mi_amor
+Juicebox
+Julian Casablancas
+The Strokes
+95
+juicebox
+Pa Donde Se Fue
+Mon Laferte
+Mon Laferte
+44
+pa_donde
+Digital Love
+Guy-Manuel de Homem-Christo
+Daft Punk
+47
+digital_love
+Viento
+Saul Hernandez
+Caifanes
+52
+viento
+The Modern Age
+Julian Casablancas
+The Strokes
+99
+modern_age
+Flaco
+Mon Laferte
+Mon Laferte
+53
+flaco
+Starboy
+The Weeknd
+Daft Punk
+4
+starboy
+Eres
+Emmanuel del Real
+Cafe Tacvba
+58
+eres
+Hard to Explain
+Julian Casablancas
+The Strokes
+100
+hard_to_explain

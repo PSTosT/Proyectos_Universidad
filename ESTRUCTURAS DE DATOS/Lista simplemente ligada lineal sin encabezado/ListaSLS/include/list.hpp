@@ -2,7 +2,7 @@
 #define __LIST_H__
 #include <exception>
 #include <string>
-
+#include <functional>
 //*Definicion
 
 template<class T>
@@ -89,27 +89,25 @@ public:
     List<T>::Position getNextPos(const List<T>::Position&) const;
     
     List<T>::Position findData(const T&) const;
-    List<T>::Position findData(const T&, const std::function<int(const T&, const T&)>) const;
+    List<T>::Position findData(const T&, const std::function<int(const T&, const T&)>&) const;
 
     T& retrieve(const List<T>::Position&);
 
     std::string toString() const;
     
     void delAll();
-
+/*
     template <class X>
     friend std::istream& operator>>(std::istream&, List<X>&);
 
-    template <class X
+    template <class X>
     friend std::ostream& operator<<(std::ostream&, const List<X>&);
 
     bool insertOrdered(const T&);
 
-    int findDataL(const T& e) const;
-    int findDataL(const T& e, const std::function<int(const T&, const T&)>& cmp) const;
-
     std::string serialize(const char& delim = '*') const;
     void deserialize(const std::string&, const char& delim = '*');
+    */
 };
 
 //*Implementacion del nodo
@@ -143,109 +141,215 @@ void List<T>::Node::setNext(List<T>::Position p){
 //*Implementacion de la lista
 
 template<class T>
+bool List<T>::isValidPos(const Position& p) const{
+    Position aux(this->anchor);
+
+    while (aux != nullptr) {
+        if(aux == p){
+            return true;
+        }
+        aux = aux->getNext();
+    }
+    return false;
+}
+
+template<class T>
+void List<T>::copyAll(const List<T>& other){
+    Position aux(other.anchor), lastInserted(nullptr), newNode;
+
+    while(aux != nullptr){
+        try{
+            newNode = new Node(aux -> getData());
+        } catch (const std::bad_alloc& ex){
+            throw Exception("Memoria no disponible, copyAll");
+        }
+
+        if(lastInserted == nullptr){
+            this->anchor = newNode;
+        } else {
+            lastInserted->setNext(newNode);
+        }
+
+        lastInserted = newNode;
+
+        aux = aux->getNext();
+    }
+}
+
+template<class T>
 List<T>::List(){
     
 }
 
 template<class T>
-List<T>::List(const List<T>&){
-    
+List<T>::List(const List<T>& other){
+    this->copyAll(other);
 }
 
 template<class T>
 List<T>::~List(){
-    
+    this->delAll();    
 }
 
 template<class T>
-List<T>::~List(){
-    
-}
+List<T>& List<T>::operator = (const List<T>& other){
+    this->delAll();
 
-template<class T>
-List<T>& List<T>::operator = (const List<T>&){
-    
+    this->copyAll(other);
+
+    return *this;
 }
 
 template<class T>
 bool List<T>::isEmpty() const{
-    
+    return this->anchor == nullptr;
 }
 
 template<class T>
-bool List<T>::insData(const List<T>::Position&, const T&){
-    
+bool List<T>::insData(const List<T>::Position& p, const T& e){
+    if(p != nullptr and !this->isValidPos(p)){
+        throw List<T>::Exception("Posicion invalida, insData");
+    }
+    try{
+        Position newNode (new Node(e));
+
+        if(p == nullptr) { //Insertar al principio
+            newNode->setNext(this->anchor);
+            this->anchor = newNode;
+        }
+        else{
+            newNode->setNext(p->getNext());
+            p->setNext(newNode);
+        }
+        return true;
+
+    } catch(const std::bad_alloc& ex) {
+        throw Exception("Memoria no disponible, insData");
+    }
+
 }
 
 template<class T>
-bool List<T>::insData(const List<T>::Position&, const T&){
-    
-}
+bool List<T>::delData(const List<T>::Position& p){
+    if(this->isValidPos(p)){
+        if(p == this->anchor){ // El primero
+        this->anchor = p->getNext();
+        } else {
+            this->getPrevPos(p)->setNext(p->getNext());
+        }
 
-template<class T>
-bool List<T>::delData(const List<T>::Position&){
-    
+        delete p;
+
+        return true;
+    }
+    else {
+        throw Exception("Posicion invalida, delData");
+    }    
 }
 
 template<class T>
 List<T>::Position List<T>::getFirstPos() const{
-    
-}
-
-template<class T>
-List<T>::Position List<T>::getFirstPos() const{
-    
+    return this->anchor;
 }
 
 template<class T>
 List<T>::Position List<T>::getLastPos() const{
-    
+    if(this->isEmpty()){
+        return nullptr;
+    }
+
+    Position aux(this->anchor);
+
+    while(aux->getNext() != nullptr){
+        aux = aux->getNext();
+    }
+    return aux;
 }
 
 template<class T>
-List<T>::Position List<T>::getPrevPos() const{
-    
+List<T>::Position List<T>::getPrevPos(const List<T>::Position& p) const{ 
+    Position aux(this->anchor);
+
+    while(aux != nullptr and aux->getNext() != p){
+        aux = aux->getNext();
+    }
+    return aux;
 }
 
 template<class T>
-List<T>::Position List<T>::getNextPos() const{
-    
+List<T>::Position List<T>::getNextPos(const List<T>::Position& p) const{
+    return this->isValidPos(p) ? p->getNext() : nullptr;
 }
 
 template<class T>
-List<T>::Position List<T>::findData(const T&) const{
+List<T>::Position List<T>::findData(const T& e) const{
+    Position aux(this->anchor);
     
+    while(aux != nullptr and aux->getData() != e){
+        aux = aux->getNext();
+    }
+    return aux;
 }
 
 template<class T>
-List<T>::Position List<T>::findData(const T&) const{
+List<T>::Position List<T>::findData(const T& e, const std::function<int(const T&, const T&)>& cmp) const{
+    Position aux(this->anchor);
     
+    while(aux != nullptr and cmp(aux->getData(), e) != 0){
+        aux = aux->getNext();
+    }
+    return aux;
 }
 
 template<class T>
-T& List<T>::retrieve(const List<T>::Position&){
+T& List<T>::retrieve(const List<T>::Position& p){
+    if(this->isValidPos(p)){
+        return p->getData();
+    }
+
+    throw Exception("Posicion invalida, retrieve");
+    
     
 }
 
 template<class T>
 std::string List<T>::toString() const{
-    
+    std::string result;
+
+    Position aux(this->anchor);
+
+    while(aux != nullptr){
+        result += aux->getData().toString() + "\n";
+
+        aux = aux->getNext();
+    }
+
+    return result;
 }
 
 template<class T>
 void List<T>::delAll(){
-    
-}
+    Position aux;
 
-std::ostream& operator<<(std::ostream&, const List<X>&){
-    
+    while(this->anchor != nullptr){
+        aux = this->anchor;
+
+        this->anchor = aux->getNext();
+        delete aux;
+    }
+
+}
+/*
+template<class X>
+std::ostream& operator<<(std::ostream& os, const List<X>& l){
+    //Pendientes
 }
 
 template<class X>
-std::istream& operator>>(std::istream&, List<X>&){
-    
+std::istream& operator>>(std::istream& is, List<X>& l){
+    //Pendientes 
 }
-
+*/
 
 // List 
 #endif // __LIST_H__

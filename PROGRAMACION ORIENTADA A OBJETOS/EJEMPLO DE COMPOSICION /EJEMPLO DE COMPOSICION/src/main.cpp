@@ -1,6 +1,7 @@
-#include <iostream>
+#include "userinterface.hpp"
 
-int main(int argc, char *argv[])
-{
-    std::cout << "Hello world!" << std::endl;
+int main(int argc, char *argv[]) {
+    UserInterface ui;
+    ui.start();
+    return 0;
 }

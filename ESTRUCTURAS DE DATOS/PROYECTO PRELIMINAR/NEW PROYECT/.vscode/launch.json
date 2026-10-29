@@ -1,32 +1,15 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Debug C++ (Termux)",
-      "type": "gdb",
-      "request": "launch",
-      "target": "${workspaceFolder}/output/main",
-      "cwd": "${workspaceFolder}",
-      "preLaunchTask": "build"
-    },
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
+    "version": "0.2.0",
+    "configurations": [
         {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
+            "name": "Debug",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/output/main",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "terminal": "external",
+            "preLaunchTask": "build"
         }
-      ]
-    }
-  ]
+    ]
 }

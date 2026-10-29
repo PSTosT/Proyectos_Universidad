@@ -299,7 +299,12 @@ void RecipeUI::findRecipe(){
             getline(cin, myStr);
             Recipe tempRecipe;
             tempRecipe.setName(myStr);
+
+            if(this->recipeListRef.isSorted(Recipe::compareByName)){
             pos = this->recipeListRef.findDataB(tempRecipe, Recipe::compareByName);
+            } else {
+                pos = this->recipeListRef.findDataL(tempRecipe, Recipe::compareByName);
+            }
 
             if(pos == -1){
                 cout << "La receta no fue encontrada..." << endl;
@@ -323,9 +328,14 @@ void RecipeUI::findRecipe(){
             cout << "Escribe el apellido del autor >> ";
             getline(cin, myStr);
             tempName.setLast(myStr);
-
             tempRecipe.setAuthor(tempName);
-            pos = this->recipeListRef.findDataB(tempRecipe, Recipe::compareByAuthor);
+
+            if(this->recipeListRef.isSorted(Recipe::compareByName)){
+                pos = this->recipeListRef.findDataB(tempRecipe, Recipe::compareByAuthor);
+            } else {
+                pos = this->recipeListRef.findDataL(tempRecipe, Recipe::compareByAuthor);
+            }
+
 
             if(pos == -1){
                 cout << "La receta no fue encontrada..." << endl;
@@ -347,6 +357,7 @@ void RecipeUI::findRecipe(){
 void RecipeUI::deleteRecipe(){
     string myStr;
     char opc;
+    int pos;
 
     clearScreen();
     cout << "Eliminar una receta..." << endl;
@@ -355,7 +366,12 @@ void RecipeUI::deleteRecipe(){
 
     Recipe tempRecipe;
     tempRecipe.setName(myStr);
-    int pos = this->recipeListRef.findDataB(tempRecipe, Recipe::compareByName);
+
+    if(this->recipeListRef.isSorted(Recipe::compareByName)){
+        pos = this->recipeListRef.findDataB(tempRecipe, Recipe::compareByName);
+    } else {
+        pos = this->recipeListRef.findDataL(tempRecipe, Recipe::compareByName);
+    }
 
     if(pos == -1){
         cout << "Receta no encontrada..." << endl;
@@ -410,7 +426,7 @@ void RecipeUI::modifyRecipe(){
     string myStr;
     int opc;
     int tempTime;
-
+    int pos;
     clearScreen();
     cout << "Modificar receta..." << endl;
     cout << "Escribe el nombre de la receta que deseas modificar >> ";
@@ -419,7 +435,12 @@ void RecipeUI::modifyRecipe(){
 
     Recipe tempRecipe;
     tempRecipe.setName(myStr);
-    int pos = this->recipeListRef.findDataB(tempRecipe, Recipe::compareByName);
+    
+    if(this->recipeListRef.isSorted(Recipe::compareByName)){
+        pos = this->recipeListRef.findDataB(tempRecipe, Recipe::compareByName);
+    } else {
+        pos = this->recipeListRef.findDataL(tempRecipe, Recipe::compareByName);
+    }
 
     if(pos == -1){
         cout << "Receta no encontrada..." << endl;

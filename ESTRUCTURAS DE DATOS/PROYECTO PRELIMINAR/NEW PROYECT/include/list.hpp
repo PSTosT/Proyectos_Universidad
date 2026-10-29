@@ -98,6 +98,11 @@ class Exception : public std::exception {
     void sortDataQuick();
     void sortDataQuick(const std::function<int(const T&, const T&)>& cmp);
 
+    //IsSorted
+    bool isSorted() const;
+    bool isSorted(const std::function<int(const T&, const T&)>& cmp) const;
+
+
     //Serializacion y deserializacion
 
     std::string serialize(const char& delim = '*') const;
@@ -657,6 +662,30 @@ void List<T, ARRAYSIZE>::sortDataQuick(const int& leftEdge, const int& rightEdge
 
     this->sortDataQuick(leftEdge, i - 1, cmp);
     this->sortDataQuick(i + 1, rightEdge, cmp);
+}
+
+//IsSorted
+
+template <class T, int ARRAYSIZE>
+bool List<T, ARRAYSIZE>::isSorted() const {
+    if (this->last < 1) return true;
+    for (int i = 0; i < this->last; i++) {
+        if (this->data[i] > this->data[i + 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <class T, int ARRAYSIZE>
+bool List<T, ARRAYSIZE>::isSorted(const std::function<int(const T&, const T&)>& cmp) const {
+    if (this->last < 1) return true;
+    for (int i = 0; i < this->last; i++) {
+        if (cmp(this->data[i], this->data[i + 1]) > 0) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // Serializacion y deserializacion

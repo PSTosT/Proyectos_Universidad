@@ -1,15 +1,16 @@
 
-#include "slist.hpp"
-#include "ingredientui.hpp"
+#include "recipeui.hpp"
+
+
 
 using namespace std;
 
 int main(void){
-    SList<Ingredient>* miSListaDeIngredientes = new SList<Ingredient>();
+    DList<Recipe>* miDListaDeRecetas = new DList<Recipe>();
     
-    IngredientUI ui(*miSListaDeIngredientes);
-    ui.manageIngredient();
-    delete miSListaDeIngredientes;
+    RecipeUI ui(*miDListaDeRecetas);
+    ui.manageRecipes();
+    delete miDListaDeRecetas;
     
     return 0;
 }

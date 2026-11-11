@@ -381,7 +381,7 @@ std::string SList<T>::serialize(const char& delim) const{
         while(pos != nullptr){
             result+= pos->getData().serialize() + delim;
 
-            pos = pos->getNext;
+            pos = pos->getNext();;
             }
         return result;
 }

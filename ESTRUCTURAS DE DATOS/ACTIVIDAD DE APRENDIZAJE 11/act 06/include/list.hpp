@@ -40,7 +40,7 @@ private:
     
     //Clase NODO
     class Node{
-    private:
+    privat
         T data;
         Position next = nullptr;
         Position prev = nullptr;

@@ -66,6 +66,11 @@ private:
     bool isValidPos(const Position&) const;
     void copyAll(const DList<T>&);
 
+    void swap(const Position&, const Position&);
+
+    void sortDataQuick(const Position&, const Position&);
+    void sortDataQuick(const Position&, const Position&, const std::function<int(const T&, const T&)>& cmp);
+
 public:
     DList();
     DList(const DList<T>&);
@@ -90,11 +95,17 @@ public:
     std::string toString() const;
     void delAll();
 
+    void sortDataQuick();
+    void sortDataQuick(const std::function<int(const T&, const T&)>& cmp);
+
     template <class X>
     friend std::istream& operator>>(std::istream&, DList<X>&);
 
     template <class X>
     friend std::ostream& operator<<(std::ostream&, const DList<X>&);
+
+    std::string serialize(const char& delim = '*') const;
+    void deserialize(const std::string&, const char& delim = '*');
 };
 
 //* Implementacion del nodo
@@ -329,6 +340,137 @@ void DList<T>::delAll() {
     this->header->setNext(this->header);
     this->header->setPrev(this->header);
 }
+template <class T>
+void DList<T>::swap(const Position& a, const Position& b){
+    T* aux(a->getDataPtr());
+    a->setDataPtr(b->getDataPtr());
+    b->setDataPtr(aux);
+}
+
+template <class T>
+void DList<T>::sortDataQuick(){
+    this->sortDataQuick(this->header->getNext(),this->header->gertPrev());
+}
+
+template <class T>
+void DList<T>::sortDataQuick(const std::function<int(const T&, const T&)>& cmp){
+    this->sortDataQuick(this->header->getNext(),this->header->gertPrev(), cmp);
+}
+
+template <class T>
+void DList<T>::sortDataQuick(const Position& leftEdge, const Position& rightEdge){
+    if(leftEdge == rightEdge){ //Criterio de paro
+        return;
+    }
+
+    if(leftEdge->getNext() == rightEdge){ //Solo dos elementos // Criterio de paro
+        if(leftEdge->getData() > rightEdge->getData()){
+            this->swap(leftEdge, rightEdge);
+        }
+
+    return;
+    }
+
+    T* pivot(rightEdge->getDataPtr());
+    Position i(leftEdge), j(rightEdge);
+
+    //p
+
+
+    while(i != j) {
+        while(i != j and i->getData() <= *pivot){
+            i = i->getNext()
+        }
+        
+        while(i != j and j->getData() >= *pivot){
+            j = j->getPrev();
+        }
+
+        if(i != j){
+            this->swap(i, j);
+        }
+    }
+
+    if(i != rightEdge){
+        this->swapData(i, rightEdge);
+    }
+
+    if(i != leftEdge()){
+        this->sortDataQuick(leftEdge, i->getPrev());
+    }
+
+    if(i != rightEdge()){
+         this->sortDataQuick(i -> getNext(), rightEdge);
+    }
+    
+}
+
+template <class T>
+void DList<T>::sortDataQuick(const std::function<int(const T&, const T&)>& cmp){
+    this->sortDataQuick(0, this->last, cmp);
+}
+
+template <class T>
+void DList<T>::sortDataQuick(const Position& leftEdge, const Position& rightEdge, const std::function<int(const T&, const T&)>& cmp){
+      if(leftEdge == rightEdge){ //Criterio de paro
+        return;
+    }
+
+    if(leftEdge->getNext() == rightEdge){ //Solo dos elementos // Criterio de paro
+        if(cpm(leftEdge->getData(), rightEdge->getData()) > 0){
+            this->swap(leftEdge, rightEdge);
+        }
+
+    return;
+    }
+
+    T* pivot(rightEdge->getDataPtr());
+    Position i(leftEdge), j(rightEdge);
+
+    //p
+
+
+    while(i != j) {
+        while(i != j and i->getData() <= *pivot){
+            i = i->getNext()
+        }
+        
+        while(i != j and j->getData() >= *pivot){
+            j = j->getPrev();
+        }
+
+        if(i != j){
+            this->swap(i, j);
+        }
+    }
+
+    if(i != rightEdge){
+        this->swapData(i, rightEdge);
+    }
+
+    if(i != leftEdge()){
+        this->sortDataQuick(leftEdge, i->getPrev(), cmp);
+    }
+
+    if(i != rightEdge()){
+         this->sortDataQuick(i -> getNext(), rightEdge, cmp);
+    }
+    
+}
+
+//IsSorted
+/*
+template <class T, int ARRAYSIZE>
+bool List<T, ARRAYSIZE>::isSorted() const {
+    if (this->last < 1) return true;
+    for (int i = 0; i < this->last; i++) {
+        if (this->data[i] > this->data[i + 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+    */
 
 template<class X>
 std::ostream& operator<<(std::ostream& os, const DList<X>& l) {
@@ -347,6 +489,40 @@ std::istream& operator>>(std::istream& is, DList<X>& l) {
         l.insData(l.getLastPos(), myObj); 
     }
     return is;
+}
+
+template<class T>
+std::string DList<T>::serialize(const char& delim) const{
+    std::string result;
+    Position pos(this->header->getNext());
+
+        while(pos != this->header){
+            result+= pos->getData().serialize() + delim;
+
+            pos = pos->getNext();;
+            }
+        return result;
+}
+
+template<class T>
+void DList<T>::deserialize(const std::string& str, const char& delim){
+    std::stringstream mySStream(str);
+    std::string myStr;
+    T myObj;
+
+    this->delAll();
+    Position lastInserted(nullptr);
+
+    while(!mySStream.eof()) {
+        getline(mySStream, myStr, delim);
+        
+        if(myStr.empty()){
+            continue;
+            }
+        myObj.deserialize(myStr);
+
+        lastInserted = this->insNode(lastInserted, myObj);
+    }
 }
 
 #endif // __DLIST_H__
